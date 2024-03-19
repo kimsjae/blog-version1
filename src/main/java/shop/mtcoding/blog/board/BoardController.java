@@ -21,13 +21,17 @@ public class BoardController {
         return "index";
     }
 
+    @GetMapping("/board/{id}")
+    public String detail(@PathVariable Integer id, HttpServletRequest request) {
+        BoardResponse.DetailDTO respDTO = boardRepository.findById(id);
+        request.setAttribute("board", respDTO);
+        return "board/detail";
+    }
+
+
     @GetMapping("/board/save-form")
     public String saveForm() {
         return "board/save-form";
     }
 
-    @GetMapping("/board/{id}")
-    public String detail(@PathVariable Integer id) {
-        return "board/detail";
-    }
 }
